@@ -17,11 +17,11 @@ import { Clock, MapPin, Loader2, AlertCircle, ArrowRight, Lightbulb } from "luci
 
 export default function ArrivalPage() {
   const stadium = useSelectedStadium();
-  
+
   const [currentLocation, setCurrentLocation] = useState("");
   const [transportMode, setTransportMode] = useState<TransportMode>("Metro");
   const [desiredArrivalTime, setDesiredArrivalTime] = useState("");
-  
+
   const [plan, setPlan] = useState<ArrivalPlan | null>(null);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -49,7 +49,7 @@ export default function ArrivalPage() {
         }),
       });
 
-      const result: ApiResponse<ArrivalPlan> = await res.json() as ApiResponse<ArrivalPlan>;
+      const result: ApiResponse<ArrivalPlan> = (await res.json()) as ApiResponse<ArrivalPlan>;
       if (!result.success) throw new Error(result.error);
       setPlan(result.data);
     } catch (err: unknown) {
@@ -62,8 +62,11 @@ export default function ArrivalPage() {
   return (
     <div className="flex min-h-screen flex-col bg-background">
       <Header />
-      
-      <main className="mx-auto w-full max-w-5xl flex-1 p-4 sm:p-6 lg:p-8" aria-labelledby="arrival-heading">
+
+      <main
+        className="mx-auto w-full max-w-5xl flex-1 p-4 sm:p-6 lg:p-8"
+        aria-labelledby="arrival-heading"
+      >
         <header className="mb-8">
           <h1 id="arrival-heading" className="text-3xl font-bold tracking-tight text-foreground">
             Arrival Planner
@@ -76,10 +79,15 @@ export default function ArrivalPage() {
         <div className="grid grid-cols-1 gap-8 lg:grid-cols-3">
           {/* Form */}
           <div className="lg:col-span-1">
-            <form onSubmit={handleSubmit} className="glass rounded-xl border border-border/50 p-5 shadow-sm">
+            <form
+              onSubmit={handleSubmit}
+              className="glass rounded-xl border border-border/50 p-5 shadow-sm"
+            >
               <div className="space-y-4">
                 <div>
-                  <label htmlFor="location" className="mb-1.5 block text-sm font-medium">Starting Location</label>
+                  <label htmlFor="location" className="mb-1.5 block text-sm font-medium">
+                    Starting Location
+                  </label>
                   <input
                     id="location"
                     type="text"
@@ -92,7 +100,9 @@ export default function ArrivalPage() {
                 </div>
 
                 <div>
-                  <label htmlFor="mode" className="mb-1.5 block text-sm font-medium">Transport Mode</label>
+                  <label htmlFor="mode" className="mb-1.5 block text-sm font-medium">
+                    Transport Mode
+                  </label>
                   <select
                     id="mode"
                     value={transportMode}
@@ -100,13 +110,17 @@ export default function ArrivalPage() {
                     className="w-full rounded-md border border-input bg-background px-3 py-2 text-sm focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary"
                   >
                     {TRANSPORT_MODES.map((mode) => (
-                      <option key={mode.id} value={mode.id}>{mode.label}</option>
+                      <option key={mode.id} value={mode.id}>
+                        {mode.label}
+                      </option>
                     ))}
                   </select>
                 </div>
 
                 <div>
-                  <label htmlFor="time" className="mb-1.5 block text-sm font-medium">Desired Arrival Time</label>
+                  <label htmlFor="time" className="mb-1.5 block text-sm font-medium">
+                    Desired Arrival Time
+                  </label>
                   <input
                     id="time"
                     type="time"
@@ -122,7 +136,11 @@ export default function ArrivalPage() {
                   disabled={isLoading || !currentLocation.trim() || !desiredArrivalTime.trim()}
                   className="w-full flex items-center justify-center gap-2 rounded-md bg-primary px-4 py-2.5 text-sm font-semibold text-primary-foreground transition-colors hover:bg-primary/90 disabled:opacity-50"
                 >
-                  {isLoading ? <Loader2 className="h-4 w-4 animate-spin" /> : <Clock className="h-4 w-4" />}
+                  {isLoading ? (
+                    <Loader2 className="h-4 w-4 animate-spin" />
+                  ) : (
+                    <Clock className="h-4 w-4" />
+                  )}
                   Plan Arrival
                 </button>
               </div>
@@ -172,8 +190,13 @@ export default function ArrivalPage() {
                   <h3 className="font-semibold text-base mb-2">Why this plan?</h3>
                   <p className="text-sm text-muted-foreground leading-relaxed">{plan.reason}</p>
                   <div className="mt-4 flex items-center gap-4 text-sm font-medium">
-                    <span className="flex items-center gap-1.5"><ArrowRight className="h-4 w-4 text-primary" /> {plan.walkingDistance} walk to seat</span>
-                    <span className="flex items-center gap-1.5"><Clock className="h-4 w-4 text-primary" /> {plan.walkingTime}</span>
+                    <span className="flex items-center gap-1.5">
+                      <ArrowRight className="h-4 w-4 text-primary" /> {plan.walkingDistance} walk to
+                      seat
+                    </span>
+                    <span className="flex items-center gap-1.5">
+                      <Clock className="h-4 w-4 text-primary" /> {plan.walkingTime}
+                    </span>
                   </div>
                 </div>
 
@@ -204,7 +227,7 @@ export default function ArrivalPage() {
           </div>
         </div>
       </main>
-      
+
       <Footer />
     </div>
   );

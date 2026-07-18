@@ -26,6 +26,7 @@ npm run test:e2e
 ## CI/CD Pipeline Integration
 
 Our GitHub Action (`.github/workflows/ci.yml`) runs on every push and pull request to the `main` branch:
+
 1. **Typecheck**: Verifies strict TypeScript compilation via `tsc --noEmit`.
 2. **Lint**: Inspects code formatting and syntax style via `next lint`.
 3. **Vitest**: Runs the unit test suite and validates code coverage against our thresholds.

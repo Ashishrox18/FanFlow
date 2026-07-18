@@ -5,14 +5,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import {
-  Map,
-  MessageSquare,
-  Accessibility,
-  Train,
-  ShieldAlert,
-  Clock,
-} from "lucide-react";
+import { Map, MessageSquare, Accessibility, Train, ShieldAlert, Clock } from "lucide-react";
 
 const FEATURES = [
   {
@@ -61,13 +54,20 @@ const FEATURES = [
 
 export function FeatureGrid() {
   return (
-    <section className="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8" aria-labelledby="features-heading">
+    <section
+      className="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8"
+      aria-labelledby="features-heading"
+    >
       <div className="text-center">
-        <h2 id="features-heading" className="text-3xl font-bold tracking-tight text-foreground sm:text-4xl">
+        <h2
+          id="features-heading"
+          className="text-3xl font-bold tracking-tight text-foreground sm:text-4xl"
+        >
           Everything You Need for Matchday
         </h2>
         <p className="mx-auto mt-4 max-w-2xl text-lg text-muted-foreground">
-          Powered by advanced Generative AI to ensure a smooth, accessible, and safe tournament experience.
+          Powered by advanced Generative AI to ensure a smooth, accessible, and safe tournament
+          experience.
         </p>
       </div>
 
@@ -83,7 +83,9 @@ export function FeatureGrid() {
               transition={{ duration: 0.5, delay: index * 0.1 }}
               className="glass relative flex flex-col gap-4 rounded-2xl p-6 transition-shadow hover:shadow-lg"
             >
-              <div className={`flex h-12 w-12 items-center justify-center rounded-xl ${feature.bg}`}>
+              <div
+                className={`flex h-12 w-12 items-center justify-center rounded-xl ${feature.bg}`}
+              >
                 <Icon className={`h-6 w-6 ${feature.color}`} aria-hidden="true" />
               </div>
               <div>

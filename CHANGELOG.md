@@ -8,6 +8,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [1.0.0] - 2026-07-18
 
 ### Added
+
 - Core Next.js 14 App Router skeleton in strict TypeScript.
 - Dual-model AI Routing framework (Groq Llama 3.3 for conversational FAQ/Emergency, Google Gemini 1.5 for reasoning).
 - Persistent global Zustand state for accessibility settings, active venue, and message history.

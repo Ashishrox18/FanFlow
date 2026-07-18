@@ -3,7 +3,9 @@
 FanFlow AI exposes REST Route Handlers to perform structured GenAI integrations.
 
 ## 1. Post /api/ai/assistant
+
 Main multilingual conversational assistant routing.
+
 - **Request Body**:
   ```json
   {
@@ -25,7 +27,9 @@ Main multilingual conversational assistant routing.
   ```
 
 ## 2. Post /api/ai/navigation
+
 Calculates paths through the stadium.
+
 - **Request Body**:
   ```json
   {
@@ -41,7 +45,7 @@ Calculates paths through the stadium.
   {
     "success": true,
     "data": {
-      "shortestRoute": [{"stepNumber":1,"instruction":"string","isAccessible":true}],
+      "shortestRoute": [{ "stepNumber": 1, "instruction": "string", "isAccessible": true }],
       "walkingTime": "string",
       "crowdLevel": "Low|Medium|High",
       "reason": "string"
@@ -50,7 +54,9 @@ Calculates paths through the stadium.
   ```
 
 ## 3. Get /api/crowd
+
 Retrieves live simulated zone updates.
+
 - **Parameters**: `stadiumId` (query param)
 - **Response**:
   ```json
@@ -58,7 +64,16 @@ Retrieves live simulated zone updates.
     "success": true,
     "data": {
       "stadiumId": "string",
-      "zones": [{"id":"string","name":"string","crowdLevel":"Low","capacityPercent":20,"waitTimeMinutes":3,"isOperational":true}]
+      "zones": [
+        {
+          "id": "string",
+          "name": "string",
+          "crowdLevel": "Low",
+          "capacityPercent": 20,
+          "waitTimeMinutes": 3,
+          "isOperational": true
+        }
+      ]
     }
   }
   ```

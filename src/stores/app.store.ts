@@ -52,8 +52,8 @@ export const useAppStore = create<AppState>()(
         isAccessibilityMode: state.isAccessibilityMode,
         isDarkMode: state.isDarkMode,
       }),
-    }
-  )
+    },
+  ),
 );
 
 // ─── Selectors ────────────────────────────────────────────────────────────────

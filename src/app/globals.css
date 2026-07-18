@@ -3,11 +3,11 @@
 /* ── Design Tokens ──────────────────────────────────────────────────────── */
 :root {
   /* Brand colors */
-  --brand-primary: 217 91% 60%;        /* #3b82f6 blue */
-  --brand-secondary: 262 83% 58%;      /* #7c3aed violet */
-  --brand-accent: 142 71% 45%;         /* #22c55e emerald */
-  --brand-danger: 0 72% 51%;           /* #dc2626 red */
-  --brand-warning: 38 92% 50%;         /* #f59e0b amber */
+  --brand-primary: 217 91% 60%; /* #3b82f6 blue */
+  --brand-secondary: 262 83% 58%; /* #7c3aed violet */
+  --brand-accent: 142 71% 45%; /* #22c55e emerald */
+  --brand-danger: 0 72% 51%; /* #dc2626 red */
+  --brand-warning: 38 92% 50%; /* #f59e0b amber */
 
   /* Light theme */
   --background: 0 0% 100%;
@@ -134,11 +134,7 @@ body {
 
 /* ── Gradient Text ──────────────────────────────────────────────────────── */
 .gradient-text {
-  background: linear-gradient(
-    135deg,
-    hsl(var(--primary)),
-    hsl(var(--brand-secondary))
-  );
+  background: linear-gradient(135deg, hsl(var(--primary)), hsl(var(--brand-secondary)));
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -146,22 +142,20 @@ body {
 
 /* ── Hero Gradient ──────────────────────────────────────────────────────── */
 .hero-gradient {
-  background: radial-gradient(
-      ellipse 80% 50% at 50% -20%,
-      hsl(var(--primary) / 0.15),
-      transparent
-    ),
-    radial-gradient(
-      ellipse 60% 40% at 80% 60%,
-      hsl(var(--brand-secondary) / 0.1),
-      transparent
-    );
+  background:
+    radial-gradient(ellipse 80% 50% at 50% -20%, hsl(var(--primary) / 0.15), transparent),
+    radial-gradient(ellipse 60% 40% at 80% 60%, hsl(var(--brand-secondary) / 0.1), transparent);
 }
 
 /* ── Crowd Level Pulse Animation ────────────────────────────────────────── */
 @keyframes pulse-dot {
-  0%, 100% { opacity: 1; }
-  50% { opacity: 0.4; }
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.4;
+  }
 }
 
 .crowd-pulse {
@@ -170,8 +164,12 @@ body {
 
 /* ── Skeleton Loading ────────────────────────────────────────────────────── */
 @keyframes shimmer {
-  0% { background-position: -200% 0; }
-  100% { background-position: 200% 0; }
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
 }
 
 .skeleton {

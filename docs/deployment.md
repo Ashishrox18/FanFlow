@@ -35,5 +35,6 @@ jobs:
 ## Production Hosting
 
 FanFlow AI is optimized for cloud deployment using Vercel or standard Docker containers.
+
 - **Node.js runtime**: Backend services run on standard Node.js serverless or edge runtimes.
 - **Cache-Control Headers**: Cache headers on dynamic API routes (like `/api/crowd`) prevent stale CDNs from serving outdated logistics updates.

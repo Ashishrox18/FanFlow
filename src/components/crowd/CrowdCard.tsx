@@ -6,18 +6,14 @@ import { motion } from "framer-motion";
 import { CrowdBadge } from "./CrowdBadge";
 import { cn } from "@/lib/utils";
 import type { CrowdZone } from "@/types";
-import {
-  Utensils,
-  DoorOpen,
-  Toilet,
-  ShoppingBag,
-  Info,
-  HeartPulse,
-} from "lucide-react";
+import { Utensils, DoorOpen, Toilet, ShoppingBag, Info, HeartPulse } from "lucide-react";
 
 // ─── Icon map ─────────────────────────────────────────────────────────────────
 
-const ZONE_ICONS: Record<CrowdZone["type"], React.ComponentType<{ className?: string; "aria-hidden"?: boolean | "true" | "false" }>> = {
+const ZONE_ICONS: Record<
+  CrowdZone["type"],
+  React.ComponentType<{ className?: string; "aria-hidden"?: boolean | "true" | "false" }>
+> = {
   Food: Utensils,
   Exit: DoorOpen,
   Restroom: Toilet,
@@ -46,7 +42,7 @@ export function CrowdCard({ zone, index }: CrowdCardProps) {
       transition={{ delay: index * 0.05, duration: 0.3 }}
       className={cn(
         "glass rounded-xl p-4 transition-shadow hover:shadow-lg",
-        !zone.isOperational && "opacity-50"
+        !zone.isOperational && "opacity-50",
       )}
       aria-label={`${zone.name}: ${zone.crowdLevel} crowd level`}
     >
@@ -59,9 +55,7 @@ export function CrowdCard({ zone, index }: CrowdCardProps) {
             <Icon className="h-4 w-4 text-primary" aria-hidden />
           </div>
           <div>
-            <h3 className="text-sm font-semibold leading-tight text-foreground">
-              {zone.name}
-            </h3>
+            <h3 className="text-sm font-semibold leading-tight text-foreground">{zone.name}</h3>
             <p className="mt-0.5 text-xs text-muted-foreground capitalize">{zone.type}</p>
           </div>
         </div>
@@ -100,7 +94,7 @@ export function CrowdCard({ zone, index }: CrowdCardProps) {
                   ? "bg-emerald-400"
                   : zone.capacityPercent < 66
                     ? "bg-amber-400"
-                    : "bg-red-400"
+                    : "bg-red-400",
               )}
               style={{ width: `${zone.capacityPercent}%` }}
             />

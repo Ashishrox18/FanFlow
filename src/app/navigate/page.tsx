@@ -50,7 +50,7 @@ export default function NavigatePage() {
         }),
       });
 
-      const result: ApiResponse<NavigationPlan> = await res.json() as ApiResponse<NavigationPlan>;
+      const result: ApiResponse<NavigationPlan> = (await res.json()) as ApiResponse<NavigationPlan>;
       if (!result.success) throw new Error(result.error);
       setPlan(result.data);
     } catch (err: unknown) {
@@ -63,8 +63,11 @@ export default function NavigatePage() {
   return (
     <div className="flex min-h-screen flex-col bg-background">
       <Header />
-      
-      <main className="mx-auto w-full max-w-5xl flex-1 p-4 sm:p-6 lg:p-8" aria-labelledby="nav-heading">
+
+      <main
+        className="mx-auto w-full max-w-5xl flex-1 p-4 sm:p-6 lg:p-8"
+        aria-labelledby="nav-heading"
+      >
         <header className="mb-8">
           <h1 id="nav-heading" className="text-3xl font-bold tracking-tight text-foreground">
             AI Smart Navigation
@@ -77,10 +80,15 @@ export default function NavigatePage() {
         <div className="grid grid-cols-1 gap-8 lg:grid-cols-3">
           {/* Form */}
           <div className="lg:col-span-1">
-            <form onSubmit={handleSubmit} className="glass rounded-xl border border-border/50 p-5 shadow-sm">
+            <form
+              onSubmit={handleSubmit}
+              className="glass rounded-xl border border-border/50 p-5 shadow-sm"
+            >
               <div className="space-y-4">
                 <div>
-                  <label htmlFor="from" className="mb-1.5 block text-sm font-medium">Starting Point</label>
+                  <label htmlFor="from" className="mb-1.5 block text-sm font-medium">
+                    Starting Point
+                  </label>
                   <input
                     id="from"
                     type="text"
@@ -93,7 +101,9 @@ export default function NavigatePage() {
                 </div>
 
                 <div>
-                  <label htmlFor="dest" className="mb-1.5 block text-sm font-medium">Destination</label>
+                  <label htmlFor="dest" className="mb-1.5 block text-sm font-medium">
+                    Destination
+                  </label>
                   <select
                     id="dest"
                     value={destination}
@@ -101,14 +111,18 @@ export default function NavigatePage() {
                     className="w-full rounded-md border border-input bg-background px-3 py-2 text-sm focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary"
                   >
                     {NAVIGATION_DESTINATIONS.map((d) => (
-                      <option key={d} value={d}>{d.replace(/([A-Z])/g, ' $1').trim()}</option>
+                      <option key={d} value={d}>
+                        {d.replace(/([A-Z])/g, " $1").trim()}
+                      </option>
                     ))}
                   </select>
                 </div>
 
                 {destination === "Seat" && (
                   <div>
-                    <label htmlFor="seat" className="mb-1.5 block text-sm font-medium">Seat Number (Optional)</label>
+                    <label htmlFor="seat" className="mb-1.5 block text-sm font-medium">
+                      Seat Number (Optional)
+                    </label>
                     <input
                       id="seat"
                       type="text"
@@ -131,7 +145,11 @@ export default function NavigatePage() {
                   disabled={isLoading || !from.trim()}
                   className="w-full flex items-center justify-center gap-2 rounded-md bg-primary px-4 py-2.5 text-sm font-semibold text-primary-foreground transition-colors hover:bg-primary/90 disabled:opacity-50"
                 >
-                  {isLoading ? <Loader2 className="h-4 w-4 animate-spin" /> : <Map className="h-4 w-4" />}
+                  {isLoading ? (
+                    <Loader2 className="h-4 w-4 animate-spin" />
+                  ) : (
+                    <Map className="h-4 w-4" />
+                  )}
                   Generate Route
                 </button>
               </div>
@@ -180,7 +198,7 @@ export default function NavigatePage() {
                   <h3 className="mb-6 text-lg font-semibold">Step-by-Step Directions</h3>
                   <RouteStepList steps={plan.shortestRoute} />
                 </div>
-                
+
                 {/* Alternative */}
                 <div className="rounded-xl border border-dashed border-border p-4 bg-muted/30 text-sm">
                   <strong>Alternative Option:</strong> {plan.alternativeOption}
@@ -197,7 +215,7 @@ export default function NavigatePage() {
           </div>
         </div>
       </main>
-      
+
       <Footer />
     </div>
   );

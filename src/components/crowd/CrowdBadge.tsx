@@ -25,13 +25,17 @@ export function CrowdBadge({ level, showLabel = true, size = "md" }: CrowdBadgeP
         config.bg,
         config.border,
         config.color,
-        size === "sm" ? "px-2 py-0.5 text-xs" : "px-3 py-1 text-sm"
+        size === "sm" ? "px-2 py-0.5 text-xs" : "px-3 py-1 text-sm",
       )}
       role="status"
       aria-label={`Crowd level: ${level}`}
     >
       <span
-        className={cn("rounded-full crowd-pulse", config.dot, size === "sm" ? "h-1.5 w-1.5" : "h-2 w-2")}
+        className={cn(
+          "rounded-full crowd-pulse",
+          config.dot,
+          size === "sm" ? "h-1.5 w-1.5" : "h-2 w-2",
+        )}
         aria-hidden="true"
       />
       {showLabel && level}

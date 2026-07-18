@@ -21,7 +21,7 @@ export default function TransportPage() {
   const [phase, setPhase] = useState<"before" | "after">("before");
   const [userLocation, setUserLocation] = useState("");
   const [preferredMode, setPreferredMode] = useState<TransportMode | "">("");
-  
+
   const [plan, setPlan] = useState<TransportPlan | null>(null);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -49,7 +49,7 @@ export default function TransportPage() {
         }),
       });
 
-      const result: ApiResponse<TransportPlan> = await res.json() as ApiResponse<TransportPlan>;
+      const result: ApiResponse<TransportPlan> = (await res.json()) as ApiResponse<TransportPlan>;
       if (!result.success) throw new Error(result.error);
       setPlan(result.data);
     } catch (err: unknown) {
@@ -62,8 +62,11 @@ export default function TransportPage() {
   return (
     <div className="flex min-h-screen flex-col bg-background">
       <Header />
-      
-      <main className="mx-auto w-full max-w-5xl flex-1 p-4 sm:p-6 lg:p-8" aria-labelledby="transport-heading">
+
+      <main
+        className="mx-auto w-full max-w-5xl flex-1 p-4 sm:p-6 lg:p-8"
+        aria-labelledby="transport-heading"
+      >
         <header className="mb-8">
           <h1 id="transport-heading" className="text-3xl font-bold tracking-tight text-foreground">
             Transportation Planner
@@ -76,9 +79,11 @@ export default function TransportPage() {
         <div className="grid grid-cols-1 gap-8 lg:grid-cols-3">
           {/* Form */}
           <div className="lg:col-span-1">
-            <form onSubmit={handleSubmit} className="glass rounded-xl border border-border/50 p-5 shadow-sm">
+            <form
+              onSubmit={handleSubmit}
+              className="glass rounded-xl border border-border/50 p-5 shadow-sm"
+            >
               <div className="space-y-4">
-                
                 {/* Phase Toggle */}
                 <div className="flex rounded-lg bg-muted p-1">
                   <button
@@ -86,7 +91,9 @@ export default function TransportPage() {
                     onClick={() => setPhase("before")}
                     className={cn(
                       "flex-1 rounded-md py-1.5 text-sm font-medium transition-all",
-                      phase === "before" ? "bg-background text-foreground shadow-sm" : "text-muted-foreground hover:text-foreground"
+                      phase === "before"
+                        ? "bg-background text-foreground shadow-sm"
+                        : "text-muted-foreground hover:text-foreground",
                     )}
                   >
                     Going to Match
@@ -96,7 +103,9 @@ export default function TransportPage() {
                     onClick={() => setPhase("after")}
                     className={cn(
                       "flex-1 rounded-md py-1.5 text-sm font-medium transition-all",
-                      phase === "after" ? "bg-background text-foreground shadow-sm" : "text-muted-foreground hover:text-foreground"
+                      phase === "after"
+                        ? "bg-background text-foreground shadow-sm"
+                        : "text-muted-foreground hover:text-foreground",
                     )}
                   >
                     Leaving Match
@@ -104,7 +113,9 @@ export default function TransportPage() {
                 </div>
 
                 <div>
-                  <label htmlFor="location" className="mb-1.5 block text-sm font-medium">Your Location</label>
+                  <label htmlFor="location" className="mb-1.5 block text-sm font-medium">
+                    Your Location
+                  </label>
                   <input
                     id="location"
                     type="text"
@@ -117,7 +128,9 @@ export default function TransportPage() {
                 </div>
 
                 <div>
-                  <label htmlFor="mode" className="mb-1.5 block text-sm font-medium">Preferred Mode (Optional)</label>
+                  <label htmlFor="mode" className="mb-1.5 block text-sm font-medium">
+                    Preferred Mode (Optional)
+                  </label>
                   <select
                     id="mode"
                     value={preferredMode}
@@ -126,7 +139,9 @@ export default function TransportPage() {
                   >
                     <option value="">No preference (Let AI decide)</option>
                     {TRANSPORT_MODES.map((mode) => (
-                      <option key={mode.id} value={mode.id}>{mode.label}</option>
+                      <option key={mode.id} value={mode.id}>
+                        {mode.label}
+                      </option>
                     ))}
                   </select>
                 </div>
@@ -136,7 +151,11 @@ export default function TransportPage() {
                   disabled={isLoading || !userLocation.trim()}
                   className="w-full flex items-center justify-center gap-2 rounded-md bg-primary px-4 py-2.5 text-sm font-semibold text-primary-foreground transition-colors hover:bg-primary/90 disabled:opacity-50"
                 >
-                  {isLoading ? <Loader2 className="h-4 w-4 animate-spin" /> : <Train className="h-4 w-4" />}
+                  {isLoading ? (
+                    <Loader2 className="h-4 w-4 animate-spin" />
+                  ) : (
+                    <Train className="h-4 w-4" />
+                  )}
                   Plan Journey
                 </button>
               </div>
@@ -178,7 +197,9 @@ export default function TransportPage() {
                         <Clock className="h-4 w-4 text-primary" /> {plan.estimatedTime}
                       </span>
                       {plan.estimatedCost && (
-                        <span className="text-xs text-muted-foreground mt-1">Cost: {plan.estimatedCost}</span>
+                        <span className="text-xs text-muted-foreground mt-1">
+                          Cost: {plan.estimatedCost}
+                        </span>
                       )}
                     </div>
                     <div className="flex flex-col items-end gap-1">
@@ -212,7 +233,7 @@ export default function TransportPage() {
           </div>
         </div>
       </main>
-      
+
       <Footer />
     </div>
   );

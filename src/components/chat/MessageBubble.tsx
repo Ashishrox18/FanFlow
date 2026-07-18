@@ -25,7 +25,7 @@ export function MessageBubble({ message }: MessageBubbleProps) {
       <div
         className={cn(
           "flex h-8 w-8 shrink-0 items-center justify-center rounded-full shadow-sm",
-          isUser ? "bg-primary text-primary-foreground" : "bg-brand-secondary text-white"
+          isUser ? "bg-primary text-primary-foreground" : "bg-brand-secondary text-white",
         )}
         aria-hidden="true"
       >
@@ -38,16 +38,11 @@ export function MessageBubble({ message }: MessageBubbleProps) {
           "relative flex max-w-[85%] flex-col gap-1 rounded-2xl px-4 py-3 text-sm shadow-sm sm:max-w-[75%]",
           isUser
             ? "rounded-tr-sm bg-primary text-primary-foreground"
-            : "rounded-tl-sm glass text-foreground"
+            : "rounded-tl-sm glass text-foreground",
         )}
       >
         <p className="whitespace-pre-wrap leading-relaxed">{message.content}</p>
-        <span
-          className={cn(
-            "text-[10px] opacity-70",
-            isUser ? "text-right" : "text-left"
-          )}
-        >
+        <span className={cn("text-[10px] opacity-70", isUser ? "text-right" : "text-left")}>
           {formatTime(message.timestamp)}
         </span>
       </div>

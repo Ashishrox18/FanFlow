@@ -35,13 +35,13 @@ const NAV_LINKS = [
  */
 export function Header() {
   const pathname = usePathname();
-  const { language, setLanguage, isAccessibilityMode, toggleAccessibilityMode } =
-    useAppStore();
+  const { language, setLanguage, isAccessibilityMode, toggleAccessibilityMode } = useAppStore();
   const { theme, setTheme } = useTheme();
   const [mobileOpen, setMobileOpen] = useState(false);
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     setMounted(true);
   }, []);
 
@@ -49,10 +49,7 @@ export function Header() {
   const closeMobile = useCallback(() => setMobileOpen(false), []);
 
   return (
-    <header
-      role="banner"
-      className="sticky top-0 z-50 w-full glass border-b border-border/50"
-    >
+    <header role="banner" className="sticky top-0 z-50 w-full glass border-b border-border/50">
       <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-4 sm:px-6">
         {/* Logo */}
         <Link
@@ -75,7 +72,7 @@ export function Header() {
                 "rounded-md px-3 py-2 text-sm font-medium transition-colors",
                 pathname === link.href
                   ? "bg-primary/10 text-primary"
-                  : "text-muted-foreground hover:bg-muted hover:text-foreground"
+                  : "text-muted-foreground hover:bg-muted hover:text-foreground",
               )}
               aria-current={pathname === link.href ? "page" : undefined}
             >
@@ -101,7 +98,11 @@ export function Header() {
                 aria-label="Select assistant language"
               >
                 {SUPPORTED_LANGUAGES.map((lang) => (
-                  <option key={lang.code} value={lang.label} className="bg-background text-foreground">
+                  <option
+                    key={lang.code}
+                    value={lang.label}
+                    className="bg-background text-foreground"
+                  >
                     {lang.flag} {lang.label}
                   </option>
                 ))}
@@ -116,13 +117,11 @@ export function Header() {
               "rounded-md p-2 transition-colors",
               isAccessibilityMode
                 ? "bg-emerald-500/20 text-emerald-400"
-                : "text-muted-foreground hover:bg-muted hover:text-foreground"
+                : "text-muted-foreground hover:bg-muted hover:text-foreground",
             )}
             aria-pressed={isAccessibilityMode}
             aria-label={
-              isAccessibilityMode
-                ? "Disable accessibility mode"
-                : "Enable accessibility mode"
+              isAccessibilityMode ? "Disable accessibility mode" : "Enable accessibility mode"
             }
             title="Accessibility mode (wheelchair-friendly routes)"
           >
@@ -133,7 +132,9 @@ export function Header() {
           <button
             onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
             className="rounded-md p-2 text-muted-foreground transition-colors hover:bg-muted hover:text-foreground"
-            aria-label={mounted && theme === "dark" ? "Switch to light mode" : "Switch to dark mode"}
+            aria-label={
+              mounted && theme === "dark" ? "Switch to light mode" : "Switch to dark mode"
+            }
           >
             {!mounted ? (
               <div className="h-4 w-4" />
@@ -183,7 +184,7 @@ export function Header() {
                     "rounded-md px-3 py-2.5 text-sm font-medium transition-colors",
                     pathname === link.href
                       ? "bg-primary/10 text-primary"
-                      : "text-muted-foreground hover:bg-muted hover:text-foreground"
+                      : "text-muted-foreground hover:bg-muted hover:text-foreground",
                   )}
                   aria-current={pathname === link.href ? "page" : undefined}
                 >
@@ -203,7 +204,11 @@ export function Header() {
                   className="bg-transparent text-sm text-foreground outline-none"
                 >
                   {SUPPORTED_LANGUAGES.map((lang) => (
-                    <option key={lang.code} value={lang.label} className="bg-background text-foreground">
+                    <option
+                      key={lang.code}
+                      value={lang.label}
+                      className="bg-background text-foreground"
+                    >
                       {lang.flag} {lang.label}
                     </option>
                   ))}

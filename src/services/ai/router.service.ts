@@ -63,7 +63,7 @@ export function selectModel(complexity: QueryComplexity): AIModel {
 export async function routeAIRequest<T>(
   systemPrompt: string,
   userPrompt: string,
-  forceModel?: AIModel
+  forceModel?: AIModel,
 ): Promise<{ data: T; model: AIModel }> {
   const model = forceModel ?? selectModel(classifyQuery(userPrompt));
 
@@ -123,7 +123,7 @@ Return ONLY valid JSON matching this exact schema:
 export function buildNavigationSystemPrompt(
   stadiumName: string,
   isAccessibilityMode: boolean,
-  language: string
+  language: string,
 ): string {
   const accessNote = isAccessibilityMode
     ? `IMPORTANT: The user requires accessibility routing. Always avoid stairs. Use elevators and ramps.`
@@ -147,7 +147,11 @@ Generate a clear step-by-step navigation plan. Return ONLY valid JSON:
 /**
  * System prompt for transport planning (Gemini).
  */
-export function buildTransportSystemPrompt(stadiumName: string, phase: string, language: string): string {
+export function buildTransportSystemPrompt(
+  stadiumName: string,
+  phase: string,
+  language: string,
+): string {
   return `You are FanFlow AI's transport planning engine for ${stadiumName}, FIFA World Cup 2026.
 Plan the ${phase}-match transport recommendation. Always respond in ${language}. Return ONLY valid JSON:
 

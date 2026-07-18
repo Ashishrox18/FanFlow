@@ -35,7 +35,7 @@ export function useCrowd(stadiumId: string): UseCrowdResult {
       const res = await fetch(`/api/crowd?stadiumId=${encodeURIComponent(stadiumId)}`, {
         cache: "no-store",
       });
-      const result: ApiResponse<CrowdSnapshot> = await res.json() as ApiResponse<CrowdSnapshot>;
+      const result: ApiResponse<CrowdSnapshot> = (await res.json()) as ApiResponse<CrowdSnapshot>;
 
       if (!result.success) {
         setError(result.error);
@@ -53,6 +53,7 @@ export function useCrowd(stadiumId: string): UseCrowdResult {
   }, [stadiumId]);
 
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     setIsLoading(true);
     void fetchCrowd();
 

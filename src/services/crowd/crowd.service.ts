@@ -47,10 +47,7 @@ export function generateCrowdSnapshot(stadiumId: string): CrowdSnapshot {
   const seed = getTimeSeed();
 
   const zones: CrowdZone[] = ZONE_TEMPLATES.map((template) => {
-    const crowdLevel = simulateCrowdLevel(
-      `${stadiumId}-${template.id}`,
-      seed
-    );
+    const crowdLevel = simulateCrowdLevel(`${stadiumId}-${template.id}`, seed);
     return {
       id: template.id,
       name: template.name,

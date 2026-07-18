@@ -4,7 +4,6 @@
  */
 
 import type { NextRequest } from "next/server";
-import { z } from "zod";
 import { AssistantRequestSchema, AssistantResponseSchema } from "@/lib/validators";
 import { routeAIRequest, buildAssistantSystemPrompt } from "@/services/ai/router.service";
 import { RateLimitError, ValidationError, toApiError } from "@/lib/errors";
@@ -23,7 +22,7 @@ export async function POST(request: NextRequest): Promise<Response> {
   const { allowed, retryAfterMs } = checkRateLimit(
     `assistant:${ip}`,
     RATE_LIMIT_MAX_REQUESTS,
-    RATE_LIMIT_WINDOW_MS
+    RATE_LIMIT_WINDOW_MS,
   );
 
   if (!allowed) {
@@ -35,8 +34,12 @@ export async function POST(request: NextRequest): Promise<Response> {
     body = await request.json();
   } catch {
     return Response.json(
-      { success: false, error: "Invalid JSON body", code: "INVALID_JSON" } satisfies ApiResponse<never>,
-      { status: 400 }
+      {
+        success: false,
+        error: "Invalid JSON body",
+        code: "INVALID_JSON",
+      } satisfies ApiResponse<never>,
+      { status: 400 },
     );
   }
 
@@ -46,7 +49,7 @@ export async function POST(request: NextRequest): Promise<Response> {
     const validationError = new ValidationError("Invalid request", fieldErrors);
     return Response.json(
       { success: false, ...toApiError(validationError) } satisfies ApiResponse<never>,
-      { status: 400 }
+      { status: 400 },
     );
   }
 
@@ -61,7 +64,7 @@ export async function POST(request: NextRequest): Promise<Response> {
     const { data: rawResponse } = await routeAIRequest<unknown>(
       systemPrompt,
       sanitisedMessage,
-      "groq"
+      "groq",
     );
 
     const validated = AssistantResponseSchema.safeParse(rawResponse);
@@ -72,26 +75,25 @@ export async function POST(request: NextRequest): Promise<Response> {
           error: "AI returned unexpected response format",
           code: "AI_VALIDATION_ERROR",
         } satisfies ApiResponse<never>,
-        { status: 502 }
+        { status: 502 },
       );
     }
 
     return Response.json(
       { success: true, data: validated.data } satisfies ApiResponse<AssistantResponse>,
-      { status: 200 }
+      { status: 200 },
     );
   } catch (error: unknown) {
     const apiError = toApiError(error);
-    return Response.json(
-      { success: false, ...apiError } satisfies ApiResponse<never>,
-      { status: 502 }
-    );
+    return Response.json({ success: false, ...apiError } satisfies ApiResponse<never>, {
+      status: 502,
+    });
   }
 }
 
 export async function GET(): Promise<Response> {
-  return Response.json({ success: false, error: "Method not allowed", code: "METHOD_NOT_ALLOWED" }, { status: 405 });
+  return Response.json(
+    { success: false, error: "Method not allowed", code: "METHOD_NOT_ALLOWED" },
+    { status: 405 },
+  );
 }
-
-// Re-export for type safety in tests
-export type { z };

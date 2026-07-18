@@ -33,8 +33,8 @@ export function HeroSection() {
           transition={{ duration: 0.5, delay: 0.1 }}
           className="mx-auto mt-6 max-w-2xl text-lg text-muted-foreground sm:text-xl"
         >
-          {APP_TAGLINE} Experience the FIFA World Cup 2026 with real-time crowd
-          intelligence, AI-powered navigation, and seamless accessibility.
+          {APP_TAGLINE} Experience the FIFA World Cup 2026 with real-time crowd intelligence,
+          AI-powered navigation, and seamless accessibility.
         </motion.p>
 
         <motion.div
@@ -49,7 +49,10 @@ export function HeroSection() {
           >
             <Zap className="h-4 w-4" aria-hidden="true" />
             Launch Assistant
-            <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" aria-hidden="true" />
+            <ArrowRight
+              className="h-4 w-4 transition-transform group-hover:translate-x-1"
+              aria-hidden="true"
+            />
           </Link>
           <Link
             href="/crowd"

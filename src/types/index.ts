@@ -8,13 +8,7 @@
 export type CrowdLevel = "Low" | "Medium" | "High";
 export type TransportMode = "Metro" | "Bus" | "Taxi" | "Walking" | "Ride-share";
 export type Language =
-  | "English"
-  | "Spanish"
-  | "French"
-  | "Portuguese"
-  | "Hindi"
-  | "Japanese"
-  | "Arabic";
+  "English" | "Spanish" | "French" | "Portuguese" | "Hindi" | "Japanese" | "Arabic";
 
 export interface Stadium {
   id: string;
@@ -56,13 +50,7 @@ export interface Amenity {
   isAccessible: boolean;
 }
 
-export type AmenityType =
-  | "Food"
-  | "Restroom"
-  | "Medical"
-  | "Merchandise"
-  | "Information"
-  | "Exit";
+export type AmenityType = "Food" | "Restroom" | "Medical" | "Merchandise" | "Information" | "Exit";
 
 export interface AccessibilityFeature {
   id: string;
@@ -94,12 +82,7 @@ export interface ArrivalPlan {
 // ─── Navigation ──────────────────────────────────────────────────────────────
 
 export type NavigationDestination =
-  | "Seat"
-  | "Food"
-  | "Restroom"
-  | "Medical"
-  | "Merchandise"
-  | "AccessibilityRoute";
+  "Seat" | "Food" | "Restroom" | "Medical" | "Merchandise" | "AccessibilityRoute";
 
 export interface NavigationRequest {
   stadiumId: string;
@@ -141,7 +124,8 @@ export interface TransportPlan {
   estimatedCost?: string;
   instructions: string[];
   congestionLevel: CrowdLevel;
-  alternative: TransportPlan | null;
+  /** Always null — alternative plans are not supported in this version */
+  alternative: null;
   reason: string;
 }
 
@@ -173,12 +157,7 @@ export interface AssistantResponse {
 }
 
 export type AssistantCategory =
-  | "Navigation"
-  | "Emergency"
-  | "Accessibility"
-  | "Transportation"
-  | "General"
-  | "Ticketing";
+  "Navigation" | "Emergency" | "Accessibility" | "Transportation" | "General" | "Ticketing";
 
 // ─── Emergency ───────────────────────────────────────────────────────────────
 

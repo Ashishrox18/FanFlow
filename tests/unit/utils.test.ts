@@ -32,9 +32,7 @@ describe("sanitiseInput", () => {
   });
 
   it("should strip script tags and content", () => {
-    expect(sanitiseInput("<script>alert('xss')</script>Hello")).toBe(
-      "alert(xss)Hello",
-    );
+    expect(sanitiseInput("<script>alert('xss')</script>Hello")).toBe("alert(xss)Hello");
   });
 
   it("should strip content between angle brackets as tags", () => {
@@ -62,21 +60,17 @@ describe("simulateCrowdLevel", () => {
   });
 
   it("should be deterministic for the same inputs", () => {
-    expect(simulateCrowdLevel("zone-1", 999)).toBe(
-      simulateCrowdLevel("zone-1", 999),
-    );
+    expect(simulateCrowdLevel("zone-1", 999)).toBe(simulateCrowdLevel("zone-1", 999));
   });
 
   it("should vary across different seeds", () => {
-    const levels = [1, 10, 100, 1000, 9999].map((s) =>
-      simulateCrowdLevel("gate-a", s),
-    );
+    const levels = [1, 10, 100, 1000, 9999].map((s) => simulateCrowdLevel("gate-a", s));
     expect(new Set(levels).size).toBeGreaterThan(1);
   });
 
   it("should vary across different zone IDs", () => {
-    const levels = ["gate-a", "gate-b", "gate-c", "food-1", "restroom-1"].map(
-      (z) => simulateCrowdLevel(z, 42),
+    const levels = ["gate-a", "gate-b", "gate-c", "food-1", "restroom-1"].map((z) =>
+      simulateCrowdLevel(z, 42),
     );
     expect(new Set(levels).size).toBeGreaterThan(1);
   });

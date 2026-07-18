@@ -19,13 +19,7 @@ export const LanguageSchema = z.enum([
   "Arabic",
 ]);
 
-export const TransportModeSchema = z.enum([
-  "Metro",
-  "Bus",
-  "Taxi",
-  "Walking",
-  "Ride-share",
-]);
+export const TransportModeSchema = z.enum(["Metro", "Bus", "Taxi", "Walking", "Ride-share"]);
 
 // ─── Arrival ─────────────────────────────────────────────────────────────────
 

@@ -34,7 +34,7 @@ const rateLimitStore = new Map<string, RateLimitEntry>();
 export function checkRateLimit(
   key: string,
   maxRequests: number,
-  windowMs: number
+  windowMs: number,
 ): { allowed: boolean; retryAfterMs: number } {
   const now = Date.now();
   const entry = rateLimitStore.get(key);

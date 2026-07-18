@@ -27,15 +27,7 @@ describe("CrowdLevelSchema", () => {
 
 describe("LanguageSchema", () => {
   it("accepts all 7 supported languages", () => {
-    const langs = [
-      "English",
-      "Spanish",
-      "French",
-      "Portuguese",
-      "Hindi",
-      "Japanese",
-      "Arabic",
-    ];
+    const langs = ["English", "Spanish", "French", "Portuguese", "Hindi", "Japanese", "Arabic"];
     langs.forEach((lang) => {
       expect(LanguageSchema.parse(lang)).toBe(lang);
     });
@@ -72,19 +64,16 @@ describe("ArrivalRequestSchema", () => {
   });
 
   it("rejects missing required fields", () => {
-    expect(() =>
-      ArrivalRequestSchema.parse({ stadiumId: "metlife" }),
-    ).toThrow();
+    expect(() => ArrivalRequestSchema.parse({ stadiumId: "metlife" })).toThrow();
   });
 
   it("rejects empty stadiumId", () => {
-    expect(() =>
-      ArrivalRequestSchema.parse({ ...validRequest, stadiumId: "" }),
-    ).toThrow();
+    expect(() => ArrivalRequestSchema.parse({ ...validRequest, stadiumId: "" })).toThrow();
   });
 
   it("language field is optional", () => {
-    const { language: _language, ...withoutLanguage } = validRequest;
+    const withoutLanguage = { ...validRequest };
+    delete (withoutLanguage as Partial<typeof validRequest>).language;
     expect(() => ArrivalRequestSchema.parse(withoutLanguage)).not.toThrow();
   });
 });
@@ -106,9 +95,7 @@ describe("ArrivalPlanSchema", () => {
   });
 
   it("rejects empty tips array", () => {
-    expect(() =>
-      ArrivalPlanSchema.parse({ ...validPlan, tips: [] }),
-    ).toThrow();
+    expect(() => ArrivalPlanSchema.parse({ ...validPlan, tips: [] })).toThrow();
   });
 
   it("rejects more than 5 tips", () => {
@@ -143,9 +130,7 @@ describe("NavigationRequestSchema", () => {
   });
 
   it("rejects invalid destination", () => {
-    expect(() =>
-      NavigationRequestSchema.parse({ ...validRequest, destination: "Gym" }),
-    ).toThrow();
+    expect(() => NavigationRequestSchema.parse({ ...validRequest, destination: "Gym" })).toThrow();
   });
 });
 
@@ -183,17 +168,15 @@ describe("AssistantRequestSchema", () => {
 
 describe("EmergencyRequestSchema", () => {
   it("accepts all valid emergency types", () => {
-    ["Medical", "Security", "LostChild", "Fire", "EmergencyExit"].forEach(
-      (type) => {
-        expect(() =>
-          EmergencyRequestSchema.parse({
-            stadiumId: "metlife",
-            type,
-            location: "Section 101, Row 5",
-          }),
-        ).not.toThrow();
-      },
-    );
+    ["Medical", "Security", "LostChild", "Fire", "EmergencyExit"].forEach((type) => {
+      expect(() =>
+        EmergencyRequestSchema.parse({
+          stadiumId: "metlife",
+          type,
+          location: "Section 101, Row 5",
+        }),
+      ).not.toThrow();
+    });
   });
 
   it("rejects invalid emergency type", () => {

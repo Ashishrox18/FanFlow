@@ -20,7 +20,7 @@ export async function POST(request: NextRequest): Promise<Response> {
   const { allowed, retryAfterMs } = checkRateLimit(
     `emergency:${ip}`,
     RATE_LIMIT_MAX_REQUESTS * 3,
-    RATE_LIMIT_WINDOW_MS
+    RATE_LIMIT_WINDOW_MS,
   );
   if (!allowed) throw new RateLimitError(retryAfterMs);
 
@@ -28,12 +28,18 @@ export async function POST(request: NextRequest): Promise<Response> {
   try {
     body = await request.json();
   } catch {
-    return Response.json({ success: false, error: "Invalid JSON body", code: "INVALID_JSON" }, { status: 400 });
+    return Response.json(
+      { success: false, error: "Invalid JSON body", code: "INVALID_JSON" },
+      { status: 400 },
+    );
   }
 
   const parsed = EmergencyRequestSchema.safeParse(body);
   if (!parsed.success) {
-    const err = new ValidationError("Invalid request", parsed.error.flatten().fieldErrors as Record<string, string[]>);
+    const err = new ValidationError(
+      "Invalid request",
+      parsed.error.flatten().fieldErrors as Record<string, string[]>,
+    );
     return Response.json({ success: false, ...toApiError(err) }, { status: 400 });
   }
 
@@ -51,14 +57,23 @@ Provide immediate step-by-step emergency guidance.`;
     const { data: rawResponse } = await routeAIRequest<unknown>(systemPrompt, userPrompt, "groq");
     const validated = EmergencyResponseSchema.safeParse(rawResponse);
     if (!validated.success) {
-      return Response.json({ success: false, error: "AI returned unexpected format", code: "AI_VALIDATION_ERROR" }, { status: 502 });
+      return Response.json(
+        { success: false, error: "AI returned unexpected format", code: "AI_VALIDATION_ERROR" },
+        { status: 502 },
+      );
     }
-    return Response.json({ success: true, data: validated.data } satisfies ApiResponse<EmergencyResponse>, { status: 200 });
+    return Response.json(
+      { success: true, data: validated.data } satisfies ApiResponse<EmergencyResponse>,
+      { status: 200 },
+    );
   } catch (error: unknown) {
     return Response.json({ success: false, ...toApiError(error) }, { status: 502 });
   }
 }
 
 export async function GET(): Promise<Response> {
-  return Response.json({ success: false, error: "Method not allowed", code: "METHOD_NOT_ALLOWED" }, { status: 405 });
+  return Response.json(
+    { success: false, error: "Method not allowed", code: "METHOD_NOT_ALLOWED" },
+    { status: 405 },
+  );
 }

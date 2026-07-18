@@ -13,8 +13,16 @@ import type { EmergencyResponse, EmergencyType, ApiResponse } from "@/types";
 import { ShieldAlert, Phone, MapPin, Loader2, AlertTriangle, ArrowRight } from "lucide-react";
 
 const EMERGENCY_TYPES: { id: EmergencyType; label: string; description: string }[] = [
-  { id: "Medical", label: "Medical Emergency", description: "Injury, illness, or medical assistance needed." },
-  { id: "Security", label: "Security Incident", description: "Suspicious activity, altercation, or threat." },
+  {
+    id: "Medical",
+    label: "Medical Emergency",
+    description: "Injury, illness, or medical assistance needed.",
+  },
+  {
+    id: "Security",
+    label: "Security Incident",
+    description: "Suspicious activity, altercation, or threat.",
+  },
   { id: "LostChild", label: "Lost Child", description: "Report a separated child or dependent." },
   { id: "Fire", label: "Fire / Smoke", description: "Report a fire hazard or visible smoke." },
   { id: "EmergencyExit", label: "Evacuation", description: "Immediate exit guidance." },
@@ -22,7 +30,7 @@ const EMERGENCY_TYPES: { id: EmergencyType; label: string; description: string }
 
 export default function EmergencyPage() {
   const stadium = useSelectedStadium();
-  
+
   const [type, setType] = useState<EmergencyType>("Medical");
   const [location, setLocation] = useState("");
   const [response, setResponse] = useState<EmergencyResponse | null>(null);
@@ -51,7 +59,8 @@ export default function EmergencyPage() {
         }),
       });
 
-      const result: ApiResponse<EmergencyResponse> = await res.json() as ApiResponse<EmergencyResponse>;
+      const result: ApiResponse<EmergencyResponse> =
+        (await res.json()) as ApiResponse<EmergencyResponse>;
       if (!result.success) throw new Error(result.error);
       setResponse(result.data);
     } catch (err: unknown) {
@@ -64,18 +73,25 @@ export default function EmergencyPage() {
   return (
     <div className="flex min-h-screen flex-col bg-background">
       <Header />
-      
-      <main className="mx-auto w-full max-w-4xl flex-1 p-4 sm:p-6 lg:p-8" aria-labelledby="emergency-heading">
+
+      <main
+        className="mx-auto w-full max-w-4xl flex-1 p-4 sm:p-6 lg:p-8"
+        aria-labelledby="emergency-heading"
+      >
         <header className="mb-8 flex flex-col sm:flex-row sm:items-center gap-4 border-b border-border/50 pb-6">
           <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-brand-danger/10 shrink-0">
             <ShieldAlert className="h-6 w-6 text-brand-danger" />
           </div>
           <div>
-            <h1 id="emergency-heading" className="text-3xl font-bold tracking-tight text-brand-danger">
+            <h1
+              id="emergency-heading"
+              className="text-3xl font-bold tracking-tight text-brand-danger"
+            >
               Emergency Assistance
             </h1>
             <p className="mt-1 text-muted-foreground">
-              Immediate AI guidance for {stadium.name}. If life-threatening, call emergency services directly.
+              Immediate AI guidance for {stadium.name}. If life-threatening, call emergency services
+              directly.
             </p>
           </div>
         </header>
@@ -91,7 +107,9 @@ export default function EmergencyPage() {
                     type="button"
                     onClick={() => setType(et.id)}
                     className={`flex flex-col items-start rounded-xl border p-4 text-left transition-all hover:border-brand-danger/50 focus-visible:ring-2 ${
-                      type === et.id ? "border-brand-danger bg-brand-danger/10 ring-1 ring-brand-danger" : "border-border glass"
+                      type === et.id
+                        ? "border-brand-danger bg-brand-danger/10 ring-1 ring-brand-danger"
+                        : "border-border glass"
                     }`}
                   >
                     <span className="font-semibold">{et.label}</span>
@@ -104,7 +122,9 @@ export default function EmergencyPage() {
             <div className="space-y-4">
               <h2 className="text-xl font-semibold">2. Your Exact Location</h2>
               <div>
-                <label htmlFor="location" className="sr-only">Location</label>
+                <label htmlFor="location" className="sr-only">
+                  Location
+                </label>
                 <input
                   id="location"
                   type="text"
@@ -129,7 +149,11 @@ export default function EmergencyPage() {
               disabled={isLoading || !location.trim()}
               className="w-full flex items-center justify-center gap-2 rounded-xl bg-brand-danger py-4 text-lg font-bold text-white transition-colors hover:bg-brand-danger/90 disabled:opacity-50"
             >
-              {isLoading ? <Loader2 className="h-5 w-5 animate-spin" /> : <ShieldAlert className="h-5 w-5" />}
+              {isLoading ? (
+                <Loader2 className="h-5 w-5 animate-spin" />
+              ) : (
+                <ShieldAlert className="h-5 w-5" />
+              )}
               GET IMMEDIATE ASSISTANCE
             </button>
           </form>
@@ -137,7 +161,9 @@ export default function EmergencyPage() {
           <div className="space-y-6 animate-in slide-in-from-bottom-4 duration-300">
             {/* Immediate Action */}
             <div className="rounded-2xl border-2 border-brand-danger bg-brand-danger/10 p-6 shadow-lg shadow-brand-danger/20">
-              <h2 className="text-lg font-bold uppercase tracking-wider text-brand-danger">Immediate Action Required</h2>
+              <h2 className="text-lg font-bold uppercase tracking-wider text-brand-danger">
+                Immediate Action Required
+              </h2>
               <p className="mt-2 text-2xl font-bold leading-snug">{response.immediateAction}</p>
             </div>
 
@@ -171,7 +197,7 @@ export default function EmergencyPage() {
                 <span className="text-xl font-semibold">{response.nearestExit}</span>
               </div>
             </div>
-            
+
             <div className="text-center mt-8">
               <button
                 onClick={() => {
@@ -186,7 +212,7 @@ export default function EmergencyPage() {
           </div>
         )}
       </main>
-      
+
       <Footer />
     </div>
   );

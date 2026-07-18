@@ -19,7 +19,7 @@ export async function POST(request: NextRequest): Promise<Response> {
   const { allowed, retryAfterMs } = checkRateLimit(
     `arrival:${ip}`,
     RATE_LIMIT_MAX_REQUESTS,
-    RATE_LIMIT_WINDOW_MS
+    RATE_LIMIT_WINDOW_MS,
   );
 
   if (!allowed) {
@@ -32,7 +32,7 @@ export async function POST(request: NextRequest): Promise<Response> {
   } catch {
     return Response.json(
       { success: false, error: "Invalid JSON body", code: "INVALID_JSON" },
-      { status: 400 }
+      { status: 400 },
     );
   }
 
@@ -56,23 +56,19 @@ Capacity: ${stadium?.capacity ?? "Unknown"}
 Please provide an optimal arrival plan.`;
 
   try {
-    const { data: rawResponse } = await routeAIRequest<unknown>(
-      systemPrompt,
-      userPrompt,
-      "gemini"
-    );
+    const { data: rawResponse } = await routeAIRequest<unknown>(systemPrompt, userPrompt, "gemini");
 
     const validated = ArrivalPlanSchema.safeParse(rawResponse);
     if (!validated.success) {
       return Response.json(
         { success: false, error: "AI returned unexpected format", code: "AI_VALIDATION_ERROR" },
-        { status: 502 }
+        { status: 502 },
       );
     }
 
     return Response.json(
       { success: true, data: validated.data } satisfies ApiResponse<ArrivalPlan>,
-      { status: 200 }
+      { status: 200 },
     );
   } catch (error: unknown) {
     return Response.json({ success: false, ...toApiError(error) }, { status: 502 });
@@ -80,5 +76,8 @@ Please provide an optimal arrival plan.`;
 }
 
 export async function GET(): Promise<Response> {
-  return Response.json({ success: false, error: "Method not allowed", code: "METHOD_NOT_ALLOWED" }, { status: 405 });
+  return Response.json(
+    { success: false, error: "Method not allowed", code: "METHOD_NOT_ALLOWED" },
+    { status: 405 },
+  );
 }

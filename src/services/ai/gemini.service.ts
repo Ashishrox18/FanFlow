@@ -44,10 +44,7 @@ const generationConfig: GenerationConfig = {
  * @returns Parsed JSON object from the model response
  * @throws {AIError | AITimeoutError | AIValidationError}
  */
-export async function callGemini<T>(
-  systemPrompt: string,
-  userPrompt: string
-): Promise<T> {
+export async function callGemini<T>(systemPrompt: string, userPrompt: string): Promise<T> {
   const client = getGeminiClient();
 
   const model = client.getGenerativeModel({
@@ -57,14 +54,11 @@ export async function callGemini<T>(
   });
 
   const timeoutPromise = new Promise<never>((_, reject) =>
-    setTimeout(() => reject(new AITimeoutError(GEMINI_MODEL)), AI_TIMEOUT_MS)
+    setTimeout(() => reject(new AITimeoutError(GEMINI_MODEL)), AI_TIMEOUT_MS),
   );
 
   try {
-    const result = await Promise.race([
-      model.generateContent(userPrompt),
-      timeoutPromise,
-    ]);
+    const result = await Promise.race([model.generateContent(userPrompt), timeoutPromise]);
 
     const raw = result.response.text();
     if (!raw) {
@@ -86,7 +80,7 @@ export async function callGemini<T>(
     }
     throw new AIError(
       `Gemini call failed: ${error instanceof Error ? error.message : "Unknown error"}`,
-      GEMINI_MODEL
+      GEMINI_MODEL,
     );
   }
 }

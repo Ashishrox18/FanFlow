@@ -19,14 +19,24 @@ export const dynamic = "force-dynamic";
  */
 export async function GET(request: NextRequest): Promise<Response> {
   const ip = request.headers.get("x-forwarded-for") ?? "anonymous";
-  const { allowed } = checkRateLimit(`crowd:${ip}`, RATE_LIMIT_MAX_REQUESTS * 2, RATE_LIMIT_WINDOW_MS);
+  const { allowed } = checkRateLimit(
+    `crowd:${ip}`,
+    RATE_LIMIT_MAX_REQUESTS * 2,
+    RATE_LIMIT_WINDOW_MS,
+  );
   if (!allowed) {
-    return Response.json({ success: false, error: "Too many requests", code: "RATE_LIMIT_EXCEEDED" }, { status: 429 });
+    return Response.json(
+      { success: false, error: "Too many requests", code: "RATE_LIMIT_EXCEEDED" },
+      { status: 429 },
+    );
   }
 
   const stadiumId = request.nextUrl.searchParams.get("stadiumId");
   if (!stadiumId) {
-    return Response.json({ success: false, error: "stadiumId is required", code: "VALIDATION_ERROR" }, { status: 400 });
+    return Response.json(
+      { success: false, error: "stadiumId is required", code: "VALIDATION_ERROR" },
+      { status: 400 },
+    );
   }
 
   try {
@@ -37,7 +47,10 @@ export async function GET(request: NextRequest): Promise<Response> {
     });
 
     if (!validated.success) {
-      return Response.json({ success: false, error: "Failed to generate crowd data", code: "INTERNAL_ERROR" }, { status: 500 });
+      return Response.json(
+        { success: false, error: "Failed to generate crowd data", code: "INTERNAL_ERROR" },
+        { status: 500 },
+      );
     }
 
     return Response.json(
@@ -48,7 +61,7 @@ export async function GET(request: NextRequest): Promise<Response> {
           "Cache-Control": "no-store, must-revalidate",
           "X-Content-Type-Options": "nosniff",
         },
-      }
+      },
     );
   } catch (error: unknown) {
     return Response.json({ success: false, ...toApiError(error) }, { status: 500 });
@@ -56,5 +69,8 @@ export async function GET(request: NextRequest): Promise<Response> {
 }
 
 export async function POST(): Promise<Response> {
-  return Response.json({ success: false, error: "Method not allowed", code: "METHOD_NOT_ALLOWED" }, { status: 405 });
+  return Response.json(
+    { success: false, error: "Method not allowed", code: "METHOD_NOT_ALLOWED" },
+    { status: 405 },
+  );
 }

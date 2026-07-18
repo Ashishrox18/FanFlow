@@ -4,6 +4,7 @@
  */
 
 import { create } from "zustand";
+import { useShallow } from "zustand/react/shallow";
 import type { ChatMessage, Language } from "@/types";
 
 // ─── State Shape ──────────────────────────────────────────────────────────────
@@ -53,14 +54,16 @@ export const useChatStore = create<ChatState>()((set) => ({
 
 /**
  * Returns the last N messages in the conversation.
+ * Uses shallow equality to prevent infinite re-renders from new array references.
  */
 export function useRecentMessages(count = 20) {
-  return useChatStore((s) => s.messages.slice(-count));
+  return useChatStore(useShallow((s) => s.messages.slice(-count)));
 }
 
 /**
  * Returns messages filtered by language.
+ * Uses shallow equality to prevent infinite re-renders from new array references.
  */
 export function useMessagesByLanguage(language: Language) {
-  return useChatStore((s) => s.messages.filter((m) => m.language === language));
+  return useChatStore(useShallow((s) => s.messages.filter((m) => m.language === language)));
 }

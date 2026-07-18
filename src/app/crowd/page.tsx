@@ -46,7 +46,10 @@ export default function CrowdPage() {
                 className="flex items-center gap-2 rounded-md bg-secondary px-3 py-1.5 text-sm font-medium text-secondary-foreground transition-colors hover:bg-secondary/80 disabled:opacity-50 focus-visible:ring-2"
                 aria-label="Refresh crowd data"
               >
-                <RefreshCw className={`h-4 w-4 ${isLoading ? "animate-spin" : ""}`} aria-hidden="true" />
+                <RefreshCw
+                  className={`h-4 w-4 ${isLoading ? "animate-spin" : ""}`}
+                  aria-hidden="true"
+                />
                 Refresh
               </button>
             </div>
@@ -54,7 +57,10 @@ export default function CrowdPage() {
 
           {/* Error State */}
           {error && (
-            <div className="mb-8 rounded-md bg-brand-danger/10 p-4 text-brand-danger flex items-center gap-3" role="alert">
+            <div
+              className="mb-8 rounded-md bg-brand-danger/10 p-4 text-brand-danger flex items-center gap-3"
+              role="alert"
+            >
               <AlertCircle className="h-5 w-5" aria-hidden="true" />
               <p>{error}</p>
             </div>

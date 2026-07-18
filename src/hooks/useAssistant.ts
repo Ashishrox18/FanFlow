@@ -17,8 +17,7 @@ import type { AssistantResponse, ApiResponse } from "@/types";
  * Reads selected stadium and language from global store.
  */
 export function useAssistant() {
-  const { addMessage, setLoading, setError, clearMessages } = useChatStore();
-  const { isLoading, error } = useChatStore();
+  const { addMessage, setLoading, setError, clearMessages, isLoading, error } = useChatStore();
   const { language, selectedStadiumId } = useAppStore();
 
   const sendMessage = useCallback(
@@ -40,7 +39,8 @@ export function useAssistant() {
           }),
         });
 
-        const result: ApiResponse<AssistantResponse> = await response.json() as ApiResponse<AssistantResponse>;
+        const result: ApiResponse<AssistantResponse> =
+          (await response.json()) as ApiResponse<AssistantResponse>;
 
         if (!result.success) {
           setError(result.error);
@@ -68,7 +68,7 @@ export function useAssistant() {
         setLoading(false);
       }
     },
-    [addMessage, setLoading, setError, language, selectedStadiumId]
+    [addMessage, setLoading, setError, language, selectedStadiumId],
   );
 
   return {

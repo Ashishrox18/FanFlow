@@ -36,10 +36,7 @@ function getGroqClient(): Groq {
  * @returns Parsed JSON object from the model response
  * @throws {AIError | AITimeoutError | AIValidationError}
  */
-export async function callGroq<T>(
-  systemPrompt: string,
-  userPrompt: string
-): Promise<T> {
+export async function callGroq<T>(systemPrompt: string, userPrompt: string): Promise<T> {
   const client = getGroqClient();
 
   const controller = new AbortController();
@@ -57,7 +54,7 @@ export async function callGroq<T>(
           { role: "user", content: userPrompt },
         ],
       },
-      { signal: controller.signal }
+      { signal: controller.signal },
     );
 
     const raw = completion.choices[0]?.message?.content;
@@ -79,7 +76,7 @@ export async function callGroq<T>(
     }
     throw new AIError(
       `Groq call failed: ${error instanceof Error ? error.message : "Unknown error"}`,
-      GROQ_MODEL
+      GROQ_MODEL,
     );
   } finally {
     clearTimeout(timeoutId);

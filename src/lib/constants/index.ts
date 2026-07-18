@@ -113,7 +113,7 @@ export const STADIUMS_DATA = [
     city: "Arlington",
     country: "USA",
     capacity: 80_000,
-    lat: 32.7480,
+    lat: 32.748,
     lng: -97.0933,
     timezone: "America/Chicago",
   },
