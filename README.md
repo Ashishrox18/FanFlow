@@ -386,9 +386,6 @@ See [docs/security.md](docs/security.md) for full details.
 | Total tests | **273 passing** |
 | TypeScript errors | **0** |
 | ESLint errors / warnings | **0 / 0** |
-| Statement coverage | **93.54%** |
-| Function coverage | **97.87%** |
-| Line coverage | **94.46%** |
 | `lib/*` / `stores/*` / `components/*` | **100%** |
 
 ### Running Tests
@@ -417,7 +414,7 @@ npm run lint
 | Unit | 9 | Error classes, AI router, Zod validators, crowd service, Zustand stores, useDebounce, AI JSON parsing, Groq service, Gemini service |
 | Component | 3 | CrowdBadge (ARIA, axe), MessageBubble (layout, a11y), Skeleton (all 3 variants) |
 | Integration | 6 | All 6 API routes — validation, success, method rejection, mocked AI |
-| Accessibility | 1 | CrowdBadge and SkipNav via jest-axe |
+| Accessibility | 5 | CrowdBadge and SkipNav via jest-axe |
 
 See [docs/testing.md](docs/testing.md) for full strategy.
 
@@ -539,37 +536,6 @@ fifaman/
 - Groq API Key ([get one free](https://console.groq.com))
 - Google Gemini API Key ([get one free](https://aistudio.google.com))
 
-### Installation
-
-```bash
-# Clone
-git clone https://github.com/Ashishrox18/FanFlow.git
-cd FanFlow
-
-# Install dependencies
-npm install
-
-# Configure environment
-cp .env.example .env.local
-# Edit .env.local and add your API keys:
-# GROQ_API_KEY=gsk_...
-# GEMINI_API_KEY=AIza...
-
-# Run development server
-npm run dev
-```
-
-Open [http://localhost:3000](http://localhost:3000).
-
-### Environment Variables
-
-| Variable | Required | Description |
-|---|---|---|
-| `GROQ_API_KEY` | ✅ | Groq API key for Llama 3.3 70B |
-| `GEMINI_API_KEY` | ✅ | Google Gemini API key |
-| `NEXT_PUBLIC_APP_URL` | Optional | Public URL for production |
-
----
 
 ## 🔌 API Overview
 
@@ -590,22 +556,6 @@ All endpoints require `Content-Type: application/json`. All responses follow:
 | `/api/crowd` | GET | Crowd snapshot — 16-zone real-time congestion per stadium |
 
 Full request/response schemas: [docs/api.md](docs/api.md)
-
----
-
-## 🔭 Future Improvements
-
-These are real improvements that would further increase alignment — not implemented to avoid feature bloat:
-
-| Improvement | Challenge Capability |
-|---|---|
-| Live IoT sensor integration (replace simulation with real sensors) | Crowd Management, Operational Intelligence |
-| AI response streaming via `ReadableStream` | Real-Time Decision Support |
-| Push notifications for zone congestion alerts | Operational Intelligence |
-| Volunteer-specific dashboard with zone assignment view | Volunteers persona |
-| Carbon footprint calculator per transport choice | Sustainability |
-| Offline mode with service worker for poor connectivity | Fan Experience |
-| Voice input/output for accessibility | Accessibility |
 
 ---
 
