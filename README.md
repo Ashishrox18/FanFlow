@@ -11,7 +11,6 @@
 [![Next.js](https://img.shields.io/badge/Next.js-App_Router-black?logo=next.js)](https://nextjs.org/)
 [![WCAG 2.2 AA](https://img.shields.io/badge/Accessibility-WCAG%202.2%20AA-green)](docs/accessibility.md)
 [![Tests](https://img.shields.io/badge/Tests-273%20passing-brightgreen)](tests/)
-[![Coverage](https://img.shields.io/badge/Coverage-93%25-brightgreen)](docs/testing.md)
 
 **FanFlow AI** is a production-grade GenAI web application that enhances stadium operations and the fan experience across all **FIFA World Cup 2026** venues. It delivers AI-powered crowd management, accessible navigation, multilingual assistance, arrival planning, transport routing, and real-time emergency guidance — purpose-built for fans, organizers, volunteers, and venue staff.
 
