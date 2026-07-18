@@ -2,6 +2,14 @@
 
 > **Your intelligent matchday assistant for FIFA World Cup 2026.**
 
+[![CI](https://github.com/Ashishrox18/FanFlow/actions/workflows/ci.yml/badge.svg)](https://github.com/Ashishrox18/FanFlow/actions/workflows/ci.yml)
+[![Security Audit](https://github.com/Ashishrox18/FanFlow/actions/workflows/security.yml/badge.svg)](https://github.com/Ashishrox18/FanFlow/actions/workflows/security.yml)
+[![License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
+[![TypeScript](https://img.shields.io/badge/TypeScript-5-blue?logo=typescript)](https://www.typescriptlang.org/)
+[![Next.js](https://img.shields.io/badge/Next.js-16-black?logo=next.js)](https://nextjs.org/)
+[![Code Style: Prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg)](https://prettier.io)
+[![WCAG 2.2 AA](https://img.shields.io/badge/accessibility-WCAG%202.2%20AA-green)](docs/accessibility.md)
+
 FanFlow AI is a production-grade Generative AI web application designed to enhance stadium operations, manage crowd intelligence, and provide seamless, accessible navigation for football fans, volunteers, and venue staff.
 
 Built for the **Google PromptWars** challenge, FanFlow AI targets a 98–100% score by prioritising Code Quality, Security, Efficiency, Testing, Accessibility, and deep Problem Statement Alignment.
@@ -51,8 +59,8 @@ All AI responses are enforced to return strict JSON via system prompts and are r
 
 1. **Clone the repository:**
    ```bash
-   git clone https://github.com/your-org/fifaman.git
-   cd fifaman
+   git clone https://github.com/Ashishrox18/FanFlow.git
+   cd FanFlow
    ```
 
 2. **Install dependencies:**

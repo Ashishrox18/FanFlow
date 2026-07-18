@@ -1,0 +1,24 @@
+# FanFlow AI Maturity Audit Checklist
+
+- [/] Phase 1: Repository Maturity Documents
+  - [ ] GitHub templates (`.github/ISSUE_TEMPLATE/bug_report.md`, `.github/ISSUE_TEMPLATE/feature_request.md`, `.github/pull_request_template.md`)
+  - [ ] Legal & Community (`LICENSE`, `SECURITY.md`, `CONTRIBUTING.md`, `CODE_OF_CONDUCT.md`, `CHANGELOG.md`)
+- [ ] Phase 2: Documentation Suite (`docs/` files)
+  - [ ] `docs/architecture.md`
+  - [ ] `docs/decision-engine.md`
+  - [ ] `docs/testing.md`
+  - [ ] `docs/security.md`
+  - [ ] `docs/accessibility.md`
+  - [ ] `docs/performance.md`
+  - [ ] `docs/deployment.md`
+  - [ ] `docs/api.md`
+  - [ ] `docs/engineering.md`
+  - [ ] `docs/prompt-alignment.md`
+- [ ] Phase 3: Code Quality Refactoring
+  - [ ] Add JSDoc to services & utils
+  - [ ] Set up Barrel exports if needed
+- [ ] Phase 4: Testing & Coverage Improvement (>95%)
+  - [ ] Add API mock tests (`tests/unit/api/*.test.ts`)
+  - [ ] Add Service mock tests (`tests/unit/services/*.test.ts`)
+- [ ] Phase 5: Problem Alignment Update
+  - [ ] Rewrite `README.md`
