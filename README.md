@@ -4,7 +4,7 @@
 
 ### Generative AI Stadium Intelligence Platform · FIFA World Cup 2026
 
-[![CI](https://github.com/Ashishrox18/FanFlow/actions/workflows/ci.yml/badge.svg)](https://github.com/Ashishrox18/FanFlow/actions/workflows/ci.yml)
+
 [![Security Audit](https://github.com/Ashishrox18/FanFlow/actions/workflows/security.yml/badge.svg)](https://github.com/Ashishrox18/FanFlow/actions/workflows/security.yml)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 [![TypeScript](https://img.shields.io/badge/TypeScript-Strict-blue?logo=typescript)](https://www.typescriptlang.org/)
